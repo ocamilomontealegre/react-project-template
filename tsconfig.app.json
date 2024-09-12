@@ -25,9 +25,11 @@
     "paths": {
       "@app/*": ["app/*"],
       "@assets/*": ["assets/*"],
+      "@common/*": ["common/*"],
       "@features/*": ["features/*"],
       "@pages/*": ["pages/*"],
       "@routes/*": ["routes/*"],
+      "@services/*": ["services/*"],
       "@ui/*": ["ui/*"],
     }
   },
