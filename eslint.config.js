@@ -1,27 +1,40 @@
+import { fileURLToPath } from "node:url";
+import { dirname } from "node:path";
 import js from "@eslint/js";
 import globals from "globals";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import unusedImports from "eslint-plugin-unused-imports";
 import tseslint from "typescript-eslint";
+import cspellPlugin from "@cspell/eslint-plugin";
+import tsParser from "@typescript-eslint/parser";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export default tseslint.config(
-  { ignores: ["dist"] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
+      parser: tsParser,
       ecmaVersion: 2020,
       globals: globals.browser,
       parserOptions: {
-        project: "./tsconfig.json",
+        project: ["./tsconfig.app.json", "./tsconfig.node.json"],
+        tsconfigRootDir: __dirname,
+        sourceType: "module",
       },
     },
     plugins: {
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
       "unused-imports": unusedImports,
+      "@cspell": cspellPlugin,
     },
+  },
+  { ignores: ["dist", "node_modules", "*.js", "vite.config.ts"] },
+  {
     rules: {
       ...reactHooks.configs.recommended.rules,
       "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
@@ -69,7 +82,7 @@ export default tseslint.config(
       "@typescript-eslint/return-await": "error",
       "@typescript-eslint/no-misused-promises": "off",
       eqeqeq: ["error", "always"],
-      "no-console": "error",
+      "no-console": "off",
       "@typescript-eslint/naming-convention": [
         "error",
         {
@@ -118,6 +131,15 @@ export default tseslint.config(
         {
           selector: "objectLiteralProperty",
           format: ["camelCase", "UPPER_CASE", "PascalCase", "snake_case"],
+        },
+      ],
+      "@cspell/spellchecker": [
+        "warn",
+        {
+          autoFix: true,
+          cspell: {
+            language: "en,es",
+          },
         },
       ],
     },

@@ -33,5 +33,5 @@
       "@ui/*": ["ui/*"],
     }
   },
-  "include": ["src"]
+  "include": ["src/**/*"]
 }
