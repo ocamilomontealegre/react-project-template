@@ -1,0 +1,8 @@
+print_post_commit_message() {
+  BLUE='\033[1;34m'
+  NC='\033[0m'
+
+  echo -e "${BLUE}Commit completed successfully. Keep up the good work!${NC}"
+}
+
+print_post_commit_message

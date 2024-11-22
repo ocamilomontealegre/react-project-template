@@ -1,1 +1,10 @@
-npx --no-install commitlint --edit 
+check_commit_format() {
+  npx --no-install commitlint --edit $1
+
+  GREEN='\033[1;32m'
+  NC='\033[0m'
+
+  echo -e "${GREEN}Commit format is valid!${NC}"
+}
+
+check_commit_format "$1"

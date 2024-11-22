@@ -137,9 +137,16 @@ export default tseslint.config(
         "warn",
         {
           autoFix: true,
+          numSuggestions: 5,
+          generateSuggestions: true,
+          checkComments: true,
+          checkIdentifiers: true,
+          checkStrings: true,
+          checkStringTemplates: true,
           cspell: {
-            language: "en,es",
+            import: ["./cspell.json"],
           },
+          cspellOptionsRoot: import.meta.url,
         },
       ],
     },
